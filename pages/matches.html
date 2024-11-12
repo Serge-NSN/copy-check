@@ -27,6 +27,7 @@
       position: fixed;
       box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.4);
       transition: transform 0.3s ease;
+      z-index: 1;
     }
     .sidebar h4 {
       font-size: 1.5rem;
@@ -175,17 +176,18 @@
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
+        <form class="d-flex ms-auto me-3">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          </form>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#"></a>
-        <form class="d-flex ms-auto me-3">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        </form>
+        <!-- here -->
         <div class="d-flex align-items-center">
           <i class="bi bi-bell fs-4 me-3"></i>
           <span class="me-3">Stanley Enow</span>
-          <img src="https://via.placeholder.com/40" alt="Profile" class="rounded-circle border" width="40" height="40">
+          <img src="../assets/img/stanley.jpg" alt="Profile" class="rounded-circle border" width="40" height="40">
         </div>
       </div>
     </nav>
