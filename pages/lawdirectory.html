@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CopyCheck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/custom.css" rel="stylesheet">
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      background-color: #333;
+      color: #e0e0e0;
+      width: 250px;
+      height: 100vh;
+      padding-top: 20px;
+      position: fixed;
+      box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+    .sidebar h4 {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .sidebar .nav-link {
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      padding: 12px;
+      margin: 8px 20px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .sidebar .nav-link.active {
+      background-color: #555;
+      color: #ffffff;
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+      background: #ffffff;
+      min-height: 100vh;
+      transition: margin-left 0.3s ease;
+    }
+    .content-section {
+      display: none;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .content-section.active {
+      display: block;
+    }
+
+    /* Table Styling */
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      background: #ffffff;
+      color: #333;
+    }
+    .table-custom th {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+    .table-custom tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    /* Top Navbar Styling */
+    .navbar {
+      background-color: #333;
+      color: #ffffff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .navbar .form-control {
+      border: none;
+      background-color: #444;
+      color: #e0e0e0;
+      padding-left: 10px;
+      border-radius: 20px;
+    }
+    .navbar .form-control::placeholder {
+      color: #ccc;
+    }
+    .navbar .navbar-brand {
+      color: #ffffff;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .navbar .bi-bell, .navbar .bi-search {
+      color: #ffffff;
+    }
+
+    /* Button Styling */
+    .btn-report {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+    }
+    .btn-allow {
+      background-color: #1dd1a1;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 991px) {
+      .sidebar {
+        transform: translateX(-250px);
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .navbar-toggler {
+        border: none;
+      }
+    }
+    @media (max-width: 575px) {
+      .navbar-brand {
+        font-size: 1.2rem;
+      }
+      .navbar .bi-bell, .navbar .bi-search {
+        font-size: 1.2rem;
+      }
+    }
+    .lawyer-card {
+            transition: transform 0.3s ease-in-out;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .lawyer-card:hover {
+            transform: translateY(-5px);
+        }
+        .lawyer-img {
+            height: 250px;
+            object-fit: cover;
+        }
+        .contact-btn {
+            transition: all 0.3s ease;
+        }
+        .contact-btn:hover {
+            transform: scale(1.05);
+        }
+        .badge-specialty {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .notable-case {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column">
+    <h4>CopyCheck</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="safeguard.html" ><i class="bi bi-shield-check me-2"></i>Safeguard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="matches.html"><i class="bi bi-c-circle me-2"></i>Matches</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="lawdirectory.html"><i class="bi bi-people me-2"></i>Legal Entities</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-content" style="background-color: #f9f9f9;">
+    
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#"></a>
+        <form class="d-flex ms-auto me-3">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <div class="d-flex align-items-center">
+          <i class="bi bi-bell fs-4 me-3"></i>
+          <span class="me-3">Lamfu</span>
+          <img src="https://via.placeholder.com/40" alt="Profile" class="rounded-circle border" width="40" height="40">
+        </div>
+      </div>
+    </nav>
+
+ 
+
+    <!-- Legal Entities Content -->
+    <div id="law-directory" class="content-section-active mt-4">
+      <h4>Legal Entities</h4>
+      <p>Access legal resources and contacts related to media rights and copyright protection.</p>
+    </div>
+
+    <div class="container py-5">
+        <h1 class="text-center mb-2 fw-bold">Music Copyright Law Specialists</h1>
+        <p class="text-center mb-5 text-muted">Expert Legal Protection for Cameroon's Music Industry</p>
+        
+        <div class="row g-4">
+            <!-- Lawyer 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card lawyer-card h-100">
+                    <img src="../assets/img/Hon.-Lady-Justice-Ntyam-Ondo-Mengue.jpg" class="card-img-top lawyer-img" alt="Me. Marie Tchuente">
+                    <div class="card-body">
+                        <span class="badge badge-specialty mb-2">Music Copyright Law</span>
+                        <h5 class="card-title fw-bold">Justice NTYAM ONDO MENGUE</h5>
+                        <p class="card-text">Specialized in digital music rights and streaming platform disputes. Former legal advisor to the Cameroon Music Corporation (CMC).</p>
+                        <p class="notable-case">Notable case: Successfully defended rights of multiple artists against unauthorized sampling.</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="mailto:m.tchuente@example.com" class="btn btn-primary contact-btn flex-grow-1">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </a>
+                            <a href="tel:+237600000001" class="btn btn-success contact-btn flex-grow-1">
+                                <i class="fas fa-phone me-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lawyer 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card lawyer-card h-100">
+                    <img src="../assets/img/Divine-Afuba.jpeg" class="card-img-top lawyer-img" alt="Me. Paul Ebongo">
+                    <div class="card-body">
+                        <span class="badge badge-specialty mb-2">Entertainment Law</span>
+                        <h5 class="card-title fw-bold">Divine Afuba</h5>
+                        <p class="card-text">25+ years experience in music industry law. Expertise in international copyright protection and music licensing agreements.</p>
+                        <p class="notable-case">Notable case: Won landmark case establishing digital reproduction rights for local artists.</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="mailto:p.ebongo@example.com" class="btn btn-primary contact-btn flex-grow-1">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </a>
+                            <a href="tel:+237600000002" class="btn btn-success contact-btn flex-grow-1">
+                                <i class="fas fa-phone me-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lawyer 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card lawyer-card h-100">
+                    <img src="../assets/img/Ferdinand-Doh-Galabe-Pic-759x1024.jpg" class="card-img-top lawyer-img" alt="Me. Sarah Ndedi">
+                    <div class="card-body">
+                        <span class="badge badge-specialty mb-2">Intellectual Property</span>
+                        <h5 class="card-title fw-bold">Ferdinand Doh Galabe</h5>
+                        <p class="card-text">Specializes in protecting traditional music rights and cultural heritage. Expert in cross-border copyright enforcement.</p>
+                        <p class="notable-case">Notable case: Protected traditional musicians' rights against unauthorized commercial use.</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="mailto:s.ndedi@example.com" class="btn btn-primary contact-btn flex-grow-1">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </a>
+                            <a href="tel:+237600000003" class="btn btn-success contact-btn flex-grow-1">
+                                <i class="fas fa-phone me-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lawyer 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card lawyer-card h-100">
+                    <img src="../assets/img/DSC_0682-1.png" class="card-img-top lawyer-img" alt="Me. Jean-Marc Fouda">
+                    <div class="card-body">
+                        <span class="badge badge-specialty mb-2">Digital Rights Management</span>
+                        <h5 class="card-title fw-bold">Me. Jean-Marc Fouda</h5>
+                        <p class="card-text">Digital rights specialist focusing on streaming platforms and online music distribution. Expert in new media licensing.</p>
+                        <p class="notable-case">Notable case: Negotiated major streaming platform agreements for Cameroonian artists.</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="mailto:jm.fouda@example.com" class="btn btn-primary contact-btn flex-grow-1">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </a>
+                            <a href="tel:+237600000004" class="btn btn-success contact-btn flex-grow-1">
+                                <i class="fas fa-phone me-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lawyer 5 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card lawyer-card h-100">
+                    <img src="../assets/img/IMG-20181219-WA0058.webp" class="card-img-top lawyer-img" alt="Me. Claire Essomba">
+                    <div class="card-body">
+                        <span class="badge badge-specialty mb-2">Music Industry Law</span>
+                        <h5 class="card-title fw-bold">Wax Dey</h5>
+                        <p class="card-text">Specialized in record label contracts and artist representation. Expert in royalty disputes and performance rights.</p>
+                        <p class="notable-case">Notable case: Recovered significant unpaid royalties for multiple recording artists.</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="mailto:c.essomba@example.com" class="btn btn-primary contact-btn flex-grow-1">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </a>
+                            <a href="tel:+237600000005" class="btn btn-success contact-btn flex-grow-1">
+                                <i class="fas fa-phone me-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lawyer 6 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card lawyer-card h-100">
+                    <img src="../assets/img/89529069_574780379786570_4603526306414460928_n-440x266.jpg" class="card-img-top lawyer-img" alt="Me. Richard Mongo">
+                    <div class="card-body">
+                        <span class="badge badge-specialty mb-2">Copyright Litigation</span>
+                        <h5 class="card-title fw-bold">Me. Richard Mongo</h5>
+                        <p class="card-text">Expert in copyright infringement litigation and music publishing rights. Former music producer turned legal advocate.</p>
+                        <p class="notable-case">Notable case: Successfully defended multiple copyright infringement cases for major artists.</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="mailto:r.mongo@example.com" class="btn btn-primary contact-btn flex-grow-1">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </a>
+                            <a href="tel:+237600000006" class="btn btn-success contact-btn flex-grow-1">
+                                <i class="fas fa-phone me-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+  </div>
+
+<!-- JavaScript to Handle Sidebar Navigation and Toggle -->
+<script>
+    // Sidebar Toggle for Smaller Screens
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebar = document.querySelector('.sidebar');
+      const toggleButton = document.querySelector('.navbar-toggler');
+
+      toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+      });
+    });
+  </script>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

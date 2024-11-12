@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CopyCheck</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+  <link href="../assets/custom.css" rel="stylesheet">
+  <style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      background-color: #333;
+      color: #e0e0e0;
+      width: 250px;
+      height: 100vh;
+      padding-top: 20px;
+      position: fixed;
+      box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+    .sidebar h4 {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .sidebar .nav-link {
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      padding: 12px;
+      margin: 8px 20px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .sidebar .nav-link.active {
+      background-color: #555;
+      color: #ffffff;
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+      background: #ffffff;
+      min-height: 100vh;
+      transition: margin-left 0.3s ease;
+    }
+    .content-section {
+      display: none;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .content-section.active {
+      display: block;
+    }
+
+    /* Table Styling */
+    .table-custom {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      background: #ffffff;
+      color: #333;
+    }
+    .table-custom th {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+    .table-custom tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    /* Top Navbar Styling */
+    .navbar {
+      background-color: #333;
+      color: #ffffff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    
+    }
+    .navbar .form-control {
+      border: none;
+      background-color: #444;
+      color: #e0e0e0;
+      padding-left: 10px;
+      border-radius: 20px;
+    }
+    .navbar .form-control::placeholder {
+      color: #ccc;
+    }
+    .navbar .navbar-brand {
+      color: #ffffff;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .navbar .bi-bell, .navbar .bi-search {
+      color: #ffffff;
+    }
+
+    /* Button Styling */
+    .btn-report {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+    }
+    .btn-allow {
+      background-color: #1dd1a1;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 991px) {
+      .sidebar {
+        transform: translateX(-250px);
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .navbar-toggler {
+        border: none;
+      }
+    }
+    @media (max-width: 575px) {
+      .navbar-brand {
+        font-size: 1.2rem;
+      }
+      .navbar .bi-bell, .navbar .bi-search {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column">
+    <h4>CopyCheck</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link " href="../index.html" ><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="safeguard.html" ><i class="bi bi-shield-check me-2"></i>Safeguard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="matches.html" ><i class="bi bi-c-circle me-2"></i>Matches</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="lawdirectory.html" ><i class="bi bi-people me-2"></i>Legal Entities</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-constent">
+    
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#"></a>
+        <form class="d-flex ms-auto me-3">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <div class="d-flex align-items-center">
+          <i class="bi bi-bell fs-4 me-3"></i>
+          <span class="me-3">Stanley Enow</span>
+          <img src="../assets/img/stanley.jpg" alt="Profile" class="rounded-circle border" width="40" height="40">
+        </div>
+      </div>
+    </nav>
+    
+
+    <!-- Safeguard Content -->
+    <!-- Main Content Area (Only the Form Section Updated) -->
+    <div class="main-content mt-4">
+        <div id="safeguard" class="content-section-active active mt-4">
+          <h4 class="fw-bold text-center mb-3">Safeguard Your Audio Content</h4>
+          <p class="text-center">Hi <span class="fw-bold">Stanley!</span> Want to secure your music from unauthorized use?</p>
+        </div>
+      
+        <!-- File Upload and Details Form -->
+        <div class="mt-4 p-5 bg-light rounded shadow-lg">
+          <form id="uploadForm" class="p-3">
+            <!-- Upload Button -->
+            <label for="audioUpload" id="uploadButtonLabel" class="upload-button mb-4 d-flex align-items-center justify-content-center p-3 border border-primary rounded bg-light shadow-sm">
+              <span id="uploadButtonText" class="text-primary fw-bold"><i class="bi bi-cloud-arrow-up-fill me-2"></i>Upload Audio File</span>
+              <div id="loadingIcon" class="loading-ico spinner-btorder text-primary ms-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </label>
+            <input type="file" id="audioUpload" accept="audio/*" class="d-none">
+            
+            <!-- Other form fields -->
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="songTitle" placeholder="Enter song title" required>
+              <label for="songTitle">Song Title</label>
+            </div>
+
+
+<!-- Album Name (Optional) -->
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="albumName" placeholder="Enter album name (if applicable)">
+    <label for="albumName">Album Name (optional)</label>
+  </div>
+  
+  <!-- Copyright Year -->
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="copyrightYear" placeholder="Enter copyright year" value="">
+    <label for="copyrightYear">Copyright Year</label>
+  </div>
+  
+  <!-- Rights Holder -->
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="rightsHolder"  placeholder="Enter rights holder name">
+    <label for="rightsHolder">Rights Holder</label>
+  </div>
+  
+
+      
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
+              <i class="bi bi-shield-lock-fill me-2"></i> Safeguard Content
+            </button>
+          </form>
+      
+          <!-- Loading Animation -->
+          <div id="loadingScreen" class="d-none mt-4 text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2 text-primary">Uploading and generating fingerprint...</p>
+          </div>
+      
+          <!-- Success Message -->
+         <!-- Success Message -->
+<div id="successMessage" class="d-none mt-4 p-4 bg-success bg-opacity-10 rounded border border-success">
+    <h5 class="text-success">Upload Successful!</h5>
+    <p><strong>Fingerprint:</strong> <span id="fingerprint" class="fw-bold"></span></p>
+    <p><strong>Song Title:</strong> <span id="songTitleOutput" class="fw-bold"></span></p>
+    <p><strong>Album Name:</strong> <span id="albumNameOutput"></span></p>
+    <p><strong>Copyright Year:</strong> <span id="copyrightYearOutput"></span></p>
+    <p><strong>Rights Holder:</strong> Stanley Enow <span id="rightsHolderOutput"></span></p>
+   
+    <p><strong>Author:</strong> Stanley Enow</p>
+    <p class="text-success">Your content has been successfully safeguarded.</p>
+  </div>
+  
+        </div>
+      </div>
+      
+  
+  <style>
+    /* Light Theme for the Form */
+    .main-content {
+      background-color: #f9f9f9;
+    }
+    .form-floating label {
+      color: #6c757d;
+    }
+    .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+    }
+    .upload-button {
+      background-color: #f0f9ff;
+      color: #0d6efd;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .upload-button:hover {
+      background-color: #e6f3ff;
+    }
+  </style>
+  
+      
+  <!-- JavaScript to Handle Sidebar Navigation and Toggle -->
+  <script>
+   document.addEventListener("DOMContentLoaded", () => {
+  const audioUpload = document.getElementById("audioUpload");
+  const loadingIcon = document.getElementById("loadingIcon");
+  const uploadButtonText = document.getElementById("uploadButtonText");
+  const successMessage = document.getElementById("successMessage");
+  const loadingScreen = document.getElementById("loadingScreen");
+  
+  audioUpload.addEventListener("change", () => {
+    if (audioUpload.files.length > 0) {
+      // Show loading icon
+      loadingIcon.style.display = "inline-block";
+      uploadButtonText.textContent = "Uploading...";
+
+      // Simulate file upload and then display the file name
+      setTimeout(() => {
+        // Hide loading icon
+        loadingIcon.style.display = "none";
+        
+        // Change button text to the file name
+        const fileName = audioUpload.files[0].name;
+        uploadButtonText.textContent = fileName;
+      }, 2000); // Simulated upload delay of 2 seconds
+    }
+  });
+
+ // Form submission handling with loading and success message
+document.getElementById("uploadForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  // Show loading screen
+  document.getElementById("loadingScreen").classList.remove("d-none");
+
+  // Simulate loading and fingerprint generation
+  setTimeout(() => {
+    document.getElementById("loadingScreen").classList.add("d-none");
+    document.getElementById("successMessage").classList.remove("d-none");
+
+    // Simulate fingerprint and output values
+    document.getElementById("fingerprint").innerText = Math.random().toString(36).substr(2, 10).toUpperCase();
+    document.getElementById("songTitleOutput").innerText = document.getElementById("songTitle").value;
+    document.getElementById("albumNameOutput").innerText = document.getElementById("albumName").value || "N/A";
+    document.getElementById("copyrightYearOutput").innerText = document.getElementById("copyrightYear").value || "N/A";
+    document.getElementById("rightsHolderOutput").innerText = document.getElementById("rightsHolder").value || "N/A";
+
+    document.getElementById("descriptionOutput").innerText = document.getElementById("description").value || "No description provided.";
+  }, 2000);
+});
+
+});
+  </script>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
