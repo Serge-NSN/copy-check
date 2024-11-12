@@ -177,21 +177,22 @@
     
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#"></a>
-        <form class="d-flex ms-auto me-3">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        </form>
-        <div class="d-flex align-items-center">
-          <i class="bi bi-bell fs-4 me-3"></i>
-          <span class="me-3">Stanley Enow</span>
-          <img src="../assets/img/stanley.jpg" alt="Profile" class="rounded-circle border" width="40" height="40">
+        <div class="container-fluid">
+          <form class="d-flex ms-auto me-3">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </form>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#"></a>
+          <!-- here -->
+          <div class="d-flex align-items-center">
+            <i class="bi bi-bell fs-4 me-3"></i>
+            <span class="me-3">Stanley Enow</span>
+            <img src="../assets/img/stanley.jpg" alt="Profile" class="rounded-circle border" width="40" height="40">
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     
 
     <!-- Safeguard Content -->
@@ -201,7 +202,7 @@
             <div class="music-details-header text-center">
                 <img src="../assets/img/stanley-cover.jpg" alt="Hein Pawa Cover" class="cover-image" height="200">
                 <div class="music-info">
-                    <h2 class="music-title">Hein Pawa</h2>
+                    <h2 class="music-title">Hein Pere</h2>
                     <p class="author"><strong>Artist:</strong> Stanley Enow</p>
                     <p class="featuring-artists"><strong>Featuring:</strong> None</p>
                     <p class="release-date"><strong>Release Date:</strong> 25th April 2020</p>
@@ -302,6 +303,15 @@ document.getElementById("uploadForm").addEventListener("submit", function(event)
 });
 
 });
+ // Sidebar Toggle for Smaller Screens
+ document.addEventListener('DOMContentLoaded', () => {
+      const sidebar = document.querySelector('.sidebar');
+      const toggleButton = document.querySelector('.navbar-toggler');
+
+      toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+      });
+    });
   </script>
 
   <!-- Bootstrap JS Bundle with Popper -->
