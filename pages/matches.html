@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CopyCheck</title>
+  <title>CopyGuard</title>
   <link href="../assets/custom.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -152,7 +152,7 @@
 
   <!-- Sidebar -->
   <div class="sidebar d-flex flex-column">
-    <h4>CopyCheck</h4>
+    <h4>CopyGuard</h4>
     <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link" href="../index.html"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
@@ -323,61 +323,62 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const composeInfringementReport = () => {
-  try {
-    // Configuration object for email details
-    const emailConfig = {
-      recipient: "abc@gmail.com",
-      subject: "Copyright Infringement Notice - Urgent Legal Matter"
-    };
-
-    // Template data object for better organization
-    const templateData = {
-      currentDate: new Date().toLocaleDateString(),
-      currentTime: new Date().toLocaleTimeString(),
-      timestamp: new Date().toISOString(),
-      reference: crypto.randomUUID() // More secure unique identifier
-    };
-
-    // Email body template with proper escaping
+    const recipient = "evanskongnyuy131@gmail.com";
+    const subject = "Copyright Infringement Notice - Urgent Legal Matter";
     const body = `Dear Legal Representative,
 
 I am writing to formally report a copyright infringement of my musical work and seek legal representation in this matter.
 
-COPYRIGHTED WORK DETAILS:
-- Original Song Title: [Your Song Title]
-- Registration Number: [Copyright Registration Number]
-- Date of Creation: [Original Creation Date]
-- Platform(s) where officially published: [Platforms]
+COPYRIGHTED WORK DETAILS
+------------------------
+Original Song Title: [Your Song Title]
+Registration Number: [Copyright Registration Number]
+Date of Creation: [Original Creation Date]
+Platform(s): [Platforms]
 
-INFRINGEMENT DETAILS:
-Date Discovered: ${templateData.currentDate}
-Time Documented: ${templateData.currentTime}
+INFRINGEMENT DETAILS
+-------------------
+Date Discovered: ${new Date().toLocaleDateString()}
+Time Documented: ${new Date().toLocaleTimeString()}
 
-[Rest of the template...]
+EVIDENCE OF INFRINGEMENT
+-----------------------
+1. Unauthorized Usage Links:
+   * [URL of infringing content 1]
+   * [URL of infringing content 2]
+   * Platform: [Platform Name]
 
-Generated on: ${templateData.currentDate} ${templateData.currentTime}
-System Reference: ${templateData.reference}`;
+2. Music Fingerprint Analysis:
+   * Similarity Score: [98% match]
+   * Analysis Tool: [Tool Name]
+   * Analysis Date: ${new Date().toLocaleDateString()}
 
-    // Construct mailto URL with proper encoding
-    const mailtoUrl = new URL('mailto:' + emailConfig.recipient);
-    mailtoUrl.searchParams.append('subject', emailConfig.subject);
-    mailtoUrl.searchParams.append('body', body);
+3. Revenue Impact:
+   * Unauthorized Streams: [Number]
+   * Estimated Loss: [Amount]
+   * Period: [Date Range]
 
-    // Open email client
-    window.location.href = mailtoUrl.toString();
+ACTIONS TAKEN
+------------
+* DMCA Notice Date: [Date]
+* Platform Response: [Details]
+* Evidence Archived: Yes
+
+I have all necessary documentation ready for review including copyright registration, proof of ownership, and technical analysis reports.
+
+Please advise on next steps.
+
+Regards,
+[Your Name]
+[Your Contact]
+
+Ref: ${Math.random().toString(36).substr(2, 9)}`;
+
+    // Using line breaks that work better in email clients
+    const emailBody = body.replace(/\n/g, '\r\n');
     
-    // Return success for error handling
-    return {
-      success: true,
-      reference: templateData.reference
-    };
-  } catch (error) {
-    console.error('Error generating infringement report:', error);
-    return {
-      success: false,
-      error: error.message
-    };
-  }
+    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoLink;
 };
   </script>
 
